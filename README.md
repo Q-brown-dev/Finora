@@ -18,6 +18,7 @@ This project was created to practise JavaScript constructor functions, prototype
 * HTML5
 * CSS3
 * JavaScript
+* GIT
 
 ## Project Structure
 

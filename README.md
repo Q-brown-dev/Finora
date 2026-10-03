@@ -22,13 +22,13 @@ This project was created to practise JavaScript constructor functions, prototype
 
 ## Project Structure
 
-```text
 finora-bank/
 ├── index.html
-├── style.css
-├── script.js
-└── README.md
-```
+├── css/
+│   └── style.css
+└── js/
+    └── script.js
+
 
 ## How to Use
 

@@ -43,6 +43,9 @@ BankAccount.prototype.withdraw = function (amount) {
 };
 
 
+
+
+
 // ================================
 // 2. USER INTERFACE LOGIC
 // ================================
@@ -76,6 +79,9 @@ function showMessage(text, type) {
     message.textContent = text;
     message.className = type;
 }
+function saveAccount(account) {
+    localStorage.setItem("BankAccount", JSON.stringify(account));
+}
 
 
 // Update the displayed account information
@@ -105,9 +111,10 @@ createForm.addEventListener("submit", function (event) {
         return;
     }
 
-    
+
 
     account = new BankAccount(owner, initialDeposit);
+    saveAccount(account);
 
     createSection.hidden = true;
     accountSection.hidden = false;
@@ -139,6 +146,7 @@ depositForm.addEventListener("submit", function (event) {
     }
 
     updateBalance();
+    saveAccount(account);
     depositForm.reset();
 
     showMessage(
@@ -174,10 +182,27 @@ withdrawForm.addEventListener("submit", function (event) {
     }
 
     updateBalance();
+    saveAccount(account);
     withdrawForm.reset();
-
+    
     showMessage(
         formatMoney(amount) + " withdrawn successfully!",
         "success"
     );
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    const savedAccount = JSON.parse(localStorage.getItem("BankAccount"));
+
+    if (savedAccount) {
+        account = new BankAccount(
+            savedAccount.owner,
+            savedAccount.balance
+        );
+
+        createSection.hidden = true;
+        accountSection.hidden = false;
+
+        updateBalance();
+    }
 });
